@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
+import { useDemoData } from "@mui/x-data-grid-generator";
 import ViewDetails from "./ViewDetails";
 
 const DataGridTable = ({
@@ -10,11 +11,22 @@ const DataGridTable = ({
   pageSize,
   setPageSize,
   totalRows,
-  setSortModel,
-  loadingRows, // Receive loadingRows from parent
 }) => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const { loading } = useDemoData({
+    dataSet: "Commodity",
+    rowLength: 500,
+    maxColumns: 6,
+  });
+
+  const [sortModel, setSortModel] = React.useState([
+    {
+      field: 'rating',
+      sort: 'desc',
+    },
+  ]);
 
   const columns = [
     {
@@ -24,7 +36,7 @@ const DataGridTable = ({
       renderCell: (params) => (
         <img
           src={params.value}
-          alt={params.row.name}
+          alt={params.row.name || "Product"}
           style={{ width: 50, height: 50, objectFit: "cover" }}
         />
       ),
@@ -43,6 +55,7 @@ const DataGridTable = ({
             backgroundColor: "#1976d2",
             color: "#fff",
             border: "none",
+            cursor: "pointer",
           }}
           onClick={() => handleOpenModal(params.row)}
         >
@@ -64,26 +77,27 @@ const DataGridTable = ({
 
   return (
     <>
-      <Box sx={{ width: "100%", overflowX: "auto" }}>
+      <Box sx={{ width: "100%", height: "555px", overflowX: "auto" }}>
         <DataGrid
           rows={data}
-          getRowId={(row) => row.id + row.name}
+          getRowId={(row) => `${row.id}-${row.name}`} // Improved uniqueness
           columns={columns}
           pagination
-          page={page}
+          page={page - 1} // Adjusted for 0-based index used by DataGrid
           pageSize={pageSize}
-          rowCount={totalRows}
+          rowCount={Number(totalRows)}
           paginationMode="server"
-          sortingMode="server"
-          onSortModelChange={(newModel) => setSortModel(newModel)} // Handle sorting
+          sortModel={sortModel}
+          onSortModelChange={(newSortModel) => setSortModel(newSortModel)}
           onPaginationModelChange={(newModel) => {
-            setPage(newModel.page);
+            setPage(newModel.page + 1); // Adjust back to 1-based index
             setPageSize(newModel.pageSize);
           }}
           sx={{ minWidth: 800 }}
-          loading={loadingRows} // Show loading state for rows only
+          loading={loading}
         />
       </Box>
+
       {selectedProduct && (
         <ViewDetails
           open={openModal}
