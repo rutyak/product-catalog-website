@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import Header from "./components/Header";
 import Filters from "./components/Filters";
 import DataGridTable from "./components/DataGridTable";
+
 const Base_url = process.env.REACT_APP_API_URL;
 
 const App = () => {
@@ -54,27 +55,51 @@ const App = () => {
   }, [page, pageSize, sortModel]);
 
   return (
-    <Box sx={{ padding: 3 }}>
+    <Box
+      sx={{
+        padding: 2,
+        minHeight: "100vh",
+        background: "linear-gradient(to right, #e0eafc, #cfdef3)", // Soft gradient
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Header title="Product Catalog" />
-      <Filters
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        categories={categories}
-        originalData={data}
-        setFilteredData={setFilteredData}
-      />
-      <DataGridTable
-        data={filteredData}
-        page={page}
-        setPage={setPage}
-        pageSize={pageSize}
-        setPageSize={setPageSize}
-        totalRows={totalRows}
-        sortModel={sortModel}
-        setSortModel={setSortModel}
-      />
+      <Box
+        sx={{
+          padding: 2,
+          borderRadius: "12px",
+        }}
+      >
+        <Filters
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          categories={categories}
+          originalData={data}
+          setFilteredData={setFilteredData}
+        />
+      </Box>
+      <Box
+        sx={{
+          padding: 2,
+          backgroundColor: "#ffffff",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <DataGridTable
+          data={filteredData}
+          page={page}
+          setPage={setPage}
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          totalRows={totalRows}
+          sortModel={sortModel}
+          setSortModel={setSortModel}
+        />
+      </Box>
     </Box>
   );
 };
