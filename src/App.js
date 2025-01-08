@@ -13,7 +13,7 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [page, setPage] = useState(0);
-  const [pageSize, setPageSize] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
   const [totalRows, setTotalRows] = useState(0);
   const [sortModel, setSortModel] = useState([]);
 
@@ -41,9 +41,7 @@ const App = () => {
 
       setData(processedData);
       setTotalRows(result.totalResults);
-      setCategories([
-        ...new Set(result.products.map((p) => p.main_category || "Unknown")),
-      ]);
+      setCategories([ ...new Set(result.products.map((p) => p.main_category || "Unknown")) ]);
       setFilteredData(processedData);
     } catch (err) {
       console.error("Error fetching rows:", err);
@@ -55,22 +53,9 @@ const App = () => {
   }, [page, pageSize, sortModel]);
 
   return (
-    <Box
-      sx={{
-        padding: 1,
-        minHeight: "97.7vh",
-        background: "linear-gradient(to right, #e0eafc, #cfdef3)", // Soft gradient
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <Box sx={{ padding: 1, minHeight: "97.7vh", background: "linear-gradient(to right, #e0eafc, #cfdef3)", display: "flex", flexDirection: "column" }}>
       <Header title="Product Catalog" />
-      <Box
-        sx={{
-          padding: 2,
-          borderRadius: "12px",
-        }}
-      >
+      <Box sx={{ padding: 2, borderRadius: "12px" }}>
         <Filters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -81,14 +66,7 @@ const App = () => {
           setFilteredData={setFilteredData}
         />
       </Box>
-      <Box
-        sx={{
-          padding: 2,
-          backgroundColor: "#ffffff",
-          borderRadius: "12px",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-        }}
-      >
+      <Box sx={{ padding: 2, backgroundColor: "#ffffff", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)" }}>
         <DataGridTable
           data={filteredData}
           page={page}
