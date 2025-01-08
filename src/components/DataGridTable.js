@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
-import { useDemoData } from '@mui/x-data-grid-generator';
 import ViewDetails from "./ViewDetails";
 
 const DataGridTable = ({
@@ -12,14 +11,10 @@ const DataGridTable = ({
   setPageSize,
   totalRows,
   setSortModel,
+  loadingRows, // Receive loadingRows from parent
 }) => {
   const [openModal, setOpenModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null); 
-  const { loading } = useDemoData({
-    dataSet: 'Commodity',
-    rowLength: 500,
-    maxColumns: 6,
-  });
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const columns = [
     {
@@ -49,7 +44,7 @@ const DataGridTable = ({
             color: "#fff",
             border: "none",
           }}
-          onClick={() => handleOpenModal(params.row)} 
+          onClick={() => handleOpenModal(params.row)}
         >
           View Details
         </button>
@@ -58,13 +53,13 @@ const DataGridTable = ({
   ];
 
   const handleOpenModal = (product) => {
-    setSelectedProduct(product); 
+    setSelectedProduct(product);
     setOpenModal(true);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setSelectedProduct(null); 
+    setSelectedProduct(null);
   };
 
   return (
@@ -80,20 +75,20 @@ const DataGridTable = ({
           rowCount={totalRows}
           paginationMode="server"
           sortingMode="server"
-          onSortModelChange={(newModel) => setSortModel(newModel)}
+          onSortModelChange={(newModel) => setSortModel(newModel)} // Handle sorting
           onPaginationModelChange={(newModel) => {
             setPage(newModel.page);
             setPageSize(newModel.pageSize);
           }}
           sx={{ minWidth: 800 }}
-          loading={loading}
+          loading={loadingRows} // Show loading state for rows only
         />
       </Box>
       {selectedProduct && (
         <ViewDetails
           open={openModal}
           onClose={handleCloseModal}
-          productDetails={selectedProduct} 
+          productDetails={selectedProduct}
         />
       )}
     </>
