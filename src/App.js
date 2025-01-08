@@ -57,8 +57,8 @@ const App = () => {
   return (
     <Box
       sx={{
-        padding: 2,
-        minHeight: "100vh",
+        padding: 1,
+        minHeight: "97.7vh",
         background: "linear-gradient(to right, #e0eafc, #cfdef3)", // Soft gradient
         display: "flex",
         flexDirection: "column",

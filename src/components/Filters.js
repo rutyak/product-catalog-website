@@ -65,8 +65,8 @@ const Filters = ({
               background: "#fff",
               borderRadius: 2,
               ".MuiInputBase-input": {
-                padding: "6px 10px", // Reduce padding
-                fontSize: "14px", // Smaller font size
+                padding: "6px 10px", 
+                fontSize: "14px", 
               },
             }}
             InputProps={{
@@ -91,8 +91,8 @@ const Filters = ({
               background: "#fff",
               borderRadius: 2,
               ".MuiSelect-select": {
-                padding: "6px 10px", // Reduce padding
-                fontSize: "14px", // Smaller font size
+                padding: "6px 10px", 
+                fontSize: "14px",
               },
             }}
           >

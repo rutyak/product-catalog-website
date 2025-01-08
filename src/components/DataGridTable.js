@@ -101,7 +101,7 @@ const DataGridTable = ({
       <Box
         sx={{
           width: "100%",
-          height: "545px",
+          height: "495px",
           overflowX: "auto",
           background: "linear-gradient(to bottom, #ffffff, #f8f9fa)",
           borderRadius: "8px",

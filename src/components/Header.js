@@ -4,21 +4,21 @@ import { Typography, Box } from "@mui/material";
 const Header = ({ title }) => (
   <Box
     sx={{
-      background: "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)", // A modern gradient
-      color: "#fff", // White text for contrast
+      background: "linear-gradient(90deg, #6a11cb 0%, #2575fc 100%)", 
+      color: "#fff", 
       padding: "10px 20px",
-      borderRadius: "12px", // More rounded corners for a smooth look
-      boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)", // A subtle, elegant shadow
+      borderRadius: "12px",
+      boxShadow: "0 6px 16px rgba(0, 0, 0, 0.2)", 
       textAlign: "center",
     }}
   >
     <Typography
       variant="h3"
       sx={{
-        fontWeight: 600, // Bold for strong emphasis
-        fontSize: { xs: "1.8rem", sm: "2.4rem", md: "3rem" }, // Responsive font size
-        letterSpacing: "2px", // Slight spacing for a clean look
-        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", // Add depth to the text
+        fontWeight: 600, 
+        fontSize: { xs: "1.3rem", sm: "1.6rem", md: "2rem" }, 
+        letterSpacing: "2px", 
+        textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", 
       }}
     >
       {title}
